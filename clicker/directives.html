@@ -1,0 +1,7 @@
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.3/dist/cdn.min.js"></script>
+
+<div x-data="{count: 0}">
+    <p x-text="`${count}x Free Baja Blast${count != 1 ? 's' : ''}`"></p>
+
+    <input type="number" name="counter" id="counter" x-bind:value="count" x-model="count"/>
+</div>
