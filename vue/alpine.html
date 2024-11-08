@@ -1,0 +1,45 @@
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.3/dist/cdn.min.js"></script>
+
+<div x-data="form">
+    <form @submit.prevent="submitForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" x-model="name" @input="validateName" :class="{ invalid: nameError }" />
+        <span x-show="nameError" class="error-message" x-text="nameError"></span>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('form', () => ({
+            name: '',
+            nameError: '',
+
+            validateName() {
+                if (this.name.length < 3) {
+                    this.nameError = 'Name must be at least 3 characters long';
+                } else {
+                    this.nameError = '';
+                }
+            },
+            submitForm() {
+                this.validateName();
+                if (!this.nameError) {
+                    alert('Form submitted successfully!');
+                }
+            }
+        }))
+    })
+</script>
+
+<style>
+    .invalid {
+        border-color: red;
+    }
+
+    .error-message {
+        color: red;
+        font-size: 0.9em;
+    }
+</style>

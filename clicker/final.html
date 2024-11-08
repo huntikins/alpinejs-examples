@@ -1,0 +1,32 @@
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.3/dist/cdn.min.js"></script>
+
+<div x-data="counter">
+    <span x-text="emoji"></span>
+
+    <p x-text="message"></p>
+    
+    <input type="number" name="counter" id="counter" value="0" x-model="count"/>
+</div>
+
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('counter', () => ({
+            count: 0,
+            emoji: '😐',
+
+            init() {
+                this.$watch('count', (value) => {
+                    if(value < 0) {
+                        this.emoji = '😥'
+                    } else if (value === 0){
+                        this.emoji = '😐'
+                    } else {
+                        this.emoji = '😎'
+                    }
+                })
+            },
+          
+          message() { return `${this.count}x Free Baja Blast${this.count != 1 ? 's' : ''}`}
+        }))
+    })
+</script>
